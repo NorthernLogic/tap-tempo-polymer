@@ -1,0 +1,25 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="bpm-display">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div>[[bpm]]</div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'bpm-display',
+
+      properties: {
+        bpm: {
+          type: Number
+        }
+      }
+    });
+  </script>
+</dom-module>
