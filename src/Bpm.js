@@ -10,11 +10,20 @@ var Bpm = (function() {
   }
 
   Bpm.prototype.tap = function() {
-    this.taps.push(Date.now());
+
+    var now = Date.now();
+
+    if (this.lastTap && (now - this.lastTap) > 3000) {
+      this.reset();
+    }
+
+    this.taps.push(now);
 
     if (this.taps.length > this.sampleSize) {
       this.taps.shift();
     }
+
+    this.lastTap = now;
 
     return this.calculate();
   };
@@ -58,5 +67,6 @@ var Bpm = (function() {
     this.taps = [];
     this.deltas = [];
   };
+
   return Bpm;
 }());
