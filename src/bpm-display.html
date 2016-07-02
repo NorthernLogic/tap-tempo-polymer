@@ -8,11 +8,11 @@
     <style>
       :host {
         display: block;
-        height: 64px;
       }
 
       paper-toolbar {
         --paper-toolbar-background: #534D0D;
+        --paper-toolbar-height: 64px;
       }
 
       .flex {
@@ -22,11 +22,22 @@
       paper-toolbar div {
         text-align: center;
       }
+
+      .bpm-value {
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .bpm-label {
+        margin-left: .5em;
+        font-weight: bold;
+      }
     </style>
 
     <paper-toolbar>
       <div class="flex"></div>
-      <div>[[_bpmDisplay(bpm)]]</div>
+      <div class="bpm-value">[[_bpmDisplay(bpm)]]</div>
+      <div class="bpm-label">BPM</div>
       <div class="flex"></div>
     </paper-toolbar>
 
@@ -43,10 +54,10 @@
 
       _bpmDisplay: function(bpm) {
         if (!bpm) {
-          return '-- BPM';
+          return '--';
         }
 
-        return Math.floor(bpm) + ' BPM';
+        return Math.floor(bpm);
       }
     });
   </script>
