@@ -1,5 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
+
 <dom-module id="tapping-surface">
   <template>
     <style>
@@ -11,6 +13,14 @@
       p.instruction {
         @apply(--layout-flex);
         margin: 2.5em 56px;
+      }
+
+      .layout {
+        @apply(--layout-vertical);
+        height: 100%;
+        text-align: center;
+        position: relative;
+
         -webkit-user-select: none; /* Chrome/Safari */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
@@ -18,19 +28,23 @@
         user-select: none;
       }
 
-      .layout {
-        @apply(--layout-vertical);
-        height: 100%;
-        text-align: center;
-      }
-
       .layout .brand {
         margin: 1em 56px;
+      }
+
+      paper-ripple {
+        color: var(--primary-color);
+      }
+
+      #autoripple {
+        color: #534D0D;
       }
 
     </style>
 
     <div class="layout">
+      <paper-ripple recenters></paper-ripple>
+      <paper-ripple id="autoripple" noink center></paper-ripple>
       <p class="instruction">To determine the BPM, tap here to the rhythm of the music.</p>
 
       <div class="brand">
@@ -49,9 +63,10 @@
 
       properties: {
         bpm: {
-          type: Number,
-          value: 0,
-          notify: true
+          type: Object,
+          value: null,
+          notify: true,
+          observer: '_bpmChanged'
         }
       },
 
@@ -64,9 +79,26 @@
         var calculation = this._bpm.tap();
 
         if (calculation) {
-          this.bpm = calculation.avg;
+          this.bpm = calculation;
         }
+      },
+
+      _bpmChanged: function(bpm) {
+        if (!bpm) return;
+
+        var avg = bpm.avg;
+        var ripple = this.$.autoripple;
+
+        if (this._pulseInt) {
+          clearInterval(this._pulseInt);
+        }
+
+        this._pulseInt = setInterval(function() {
+          ripple.downAction();
+          ripple.upAction();
+        }, (1000 * 60) / avg);
       }
+
     });
   </script>
 </dom-module>

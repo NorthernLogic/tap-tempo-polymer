@@ -16,7 +16,9 @@
     "iron-selector": "polymerelements/iron-selector#^1.0.0",
     "paper-icon-button": "PolymerElements/paper-icon-button#~1.1.1",
     "polymer": "polymer/polymer#^1.4.0",
-    "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.6"
+    "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.6",
+    "paper-ripple": "PolymerElements/paper-ripple#^1.0.8",
+    "paper-progress": "PolymerElements/paper-progress#^1.0.9"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

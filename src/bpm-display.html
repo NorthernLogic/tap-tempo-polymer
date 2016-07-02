@@ -2,6 +2,7 @@
 
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
 
 <dom-module id="bpm-display">
   <template>
@@ -11,8 +12,9 @@
       }
 
       paper-toolbar {
-        --paper-toolbar-background: #534D0D;
-        --paper-toolbar-height: 64px;
+        --paper-toolbar-background: white;
+        --paper-toolbar-color: #646263;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.26);
       }
 
       .flex {
@@ -31,14 +33,15 @@
       .bpm-label {
         margin-left: .5em;
         font-weight: bold;
+        text-transform: uppercase;
       }
     </style>
 
     <paper-toolbar>
-      <div class="flex"></div>
       <div class="bpm-value">[[_bpmDisplay(bpm)]]</div>
-      <div class="bpm-label">BPM</div>
+      <div class="bpm-label">[[_bpmLabel()]]</div>
       <div class="flex"></div>
+      <div>[[_minMaxDisplay(bpm)]]</div>
     </paper-toolbar>
 
   </template>
@@ -48,8 +51,14 @@
 
       properties: {
         bpm: {
-          type: Number
+          type: Object
         }
+      },
+
+      _bpmLabel: function() {
+        // This is here in case I want to make this take advantage of
+        // space and spell out the whole term later. Media Queries.
+        return "BPM";
       },
 
       _bpmDisplay: function(bpm) {
@@ -57,7 +66,14 @@
           return '--';
         }
 
-        return Math.floor(bpm);
+        return Math.round(bpm.avg);
+      },
+
+      _minMaxDisplay: function(bpm) {
+        if (!bpm) {
+          return;
+        }
+        return 'Min ' + Math.round(bpm.min) + ' / Max ' + Math.round(bpm.max);
       }
     });
   </script>

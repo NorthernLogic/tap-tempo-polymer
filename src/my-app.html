@@ -6,7 +6,6 @@
 
 <link rel="import" href="bpm-display.html">
 <link rel="import" href="tapping-surface.html">
-<link rel="import" href="bpm-meter.html">
 
 <dom-module id="my-app">
 
@@ -30,7 +29,12 @@
       }
 
       paper-toolbar {
-        --paper-toolbar-color: black;
+        --paper-toolbar-background: #fff;
+        --paper-toolbar-color: #1A1A1A;
+      }
+
+      paper-toolbar .title {
+        margin-left: 0 !important;
       }
 
     </style>
@@ -40,7 +44,6 @@
         <div class="title">Tap Tempo</div>
       </paper-toolbar>
 
-      <bpm-meter bpm="[[bpm]]"></bpm-meter>
       <bpm-display bpm="[[bpm]]"></bpm-display>
       <tapping-surface bpm="{{bpm}}"></tapping-surface>
     </div>
@@ -55,7 +58,7 @@
 
       properties: {
         bpm: {
-          type: Number
+          type: Object
         }
       }
 
