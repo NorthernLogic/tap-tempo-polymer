@@ -9,19 +9,41 @@
       }
 
       p.instruction {
-        text-align: center;
-        margin: 2.5em 3em;
-
+        @apply(--layout-flex);
+        margin: 2.5em 56px;
         -webkit-user-select: none; /* Chrome/Safari */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
         -o-user-select: none;
         user-select: none;
+      }
+
+      .layout {
+        @apply(--layout-vertical);
+        height: 100%;
+        text-align: center;
+      }
+
+      .layout .brand {
+        margin: 1em 56px;
+      }
+
+      .brand img {
 
       }
+
     </style>
 
-    <p class="instruction">To determine the BPM, tap here to the rhythm of the music.</p>
+    <div class="layout">
+      <p class="instruction">To determine the BPM, tap here to the rhythm of the music.</p>
+
+      <div class="brand">
+        <a href="http://wearenorthern.com" target="_blank">
+          <img src="/images/nl-mark.png" height="72" alt="Northern Logic logo">
+        </a>
+      </div>
+
+    </div>
 
   </template>
   <script src="Bpm.js" charset="utf-8"></script>
@@ -32,6 +54,7 @@
       properties: {
         bpm: {
           type: Number,
+          value: 0,
           notify: true
         }
       },
