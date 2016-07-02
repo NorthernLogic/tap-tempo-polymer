@@ -1,0 +1,41 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="tapping-surface">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 300px;
+        background: blue;
+      }
+    </style>
+  </template>
+  <script src="Bpm.js" charset="utf-8"></script>
+  <script>
+    Polymer({
+      is: 'tapping-surface',
+
+      properties: {
+        bpm: {
+          type: Number,
+          notify: true
+        }
+      },
+
+      ready: function() {
+        this._bpm = new Bpm();
+        this.listen(this, 'tap', '_onTap');
+      },
+
+      _onTap: function() {
+        this._bpm.tap();
+
+        var calculation = this._bpm.calculate();
+
+        if (calculation) {
+          this.bpm = calculation.avg;
+        }
+      }
+    });
+  </script>
+</dom-module>

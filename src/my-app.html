@@ -1,18 +1,14 @@
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="bpm-display.html">
+<link rel="import" href="tapping-surface.html">
 
 <dom-module id="my-app">
 
@@ -22,37 +18,18 @@
 
       :host {
         display: block;
-        --app-primary-color: #4285f4;
+        --app-primary-color: #FFEC16;
         --app-secondary-color: black;
       }
 
       app-header {
         background-color: var(--app-primary-color);
-        color: #fff;
+        color: black;
       }
 
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
       }
-
-      .drawer-list {
-        margin: 0 20px;
-      }
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        line-height: 40px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-      }
-      .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
-      }
-      .drawer-list a.subroute {
-        padding-left: 32px;
-      }
-
 
     </style>
 
@@ -65,8 +42,10 @@
       </app-header>
 
       <div>
-        <bpm-display bpm="20"></bpm-display>
+        <bpm-display bpm="[[bpm]]"></bpm-display>
+        <tapping-surface bpm="{{bpm}}"></tapping-surface>
       </div>
+
 
     </app-header-layout>
 
@@ -79,6 +58,12 @@
       is: 'my-app',
 
       properties: {
+        bpm: {
+          type: Number
+        }
+      },
+
+      ready: function() {
 
       },
 
