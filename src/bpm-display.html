@@ -1,5 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+
 <dom-module id="bpm-display">
   <template>
     <style>
@@ -8,14 +11,24 @@
         height: 64px;
       }
 
-      .container div {
+      paper-toolbar {
+        --paper-toolbar-background: #534D0D;
+      }
+
+      .flex {
+        @apply(--layout-flex);
+      }
+
+      paper-toolbar div {
         text-align: center;
       }
     </style>
 
-    <div class="container">
-      <div>[[bpm]] BPM</div>
-    </div>
+    <paper-toolbar>
+      <div class="flex"></div>
+      <div>[[_bpmDisplay(bpm)]]</div>
+      <div class="flex"></div>
+    </paper-toolbar>
 
   </template>
   <script>
@@ -26,6 +39,14 @@
         bpm: {
           type: Number
         }
+      },
+
+      _bpmDisplay: function(bpm) {
+        if (!bpm) {
+          return '-- BPM';
+        }
+
+        return Math.floor(bpm) + ' BPM';
       }
     });
   </script>

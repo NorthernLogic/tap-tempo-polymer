@@ -15,8 +15,8 @@
 
       :host {
         display: block;
-        --app-primary-color: #FFEC16;
-        --app-secondary-color: black;
+        --primary-color: #FFEC16;
+        --secondary-color: black;
       }
 
       .layout {
@@ -26,6 +26,10 @@
 
       .layout tapping-surface {
         @apply(--layout-flex);
+      }
+
+      paper-toolbar {
+        --paper-toolbar-color: black;
       }
 
     </style>
