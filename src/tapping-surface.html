@@ -28,9 +28,7 @@
       },
 
       _onTap: function() {
-        this._bpm.tap();
-
-        var calculation = this._bpm.calculate();
+        var calculation = this._bpm.tap();
 
         if (calculation) {
           this.bpm = calculation.avg;
