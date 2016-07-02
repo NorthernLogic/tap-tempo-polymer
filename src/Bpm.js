@@ -66,6 +66,8 @@ var Bpm = (function() {
   Bpm.prototype.reset = function() {
     this.taps = [];
     this.deltas = [];
+    this.min = undefined;
+    this.max = undefined;
   };
 
   return Bpm;
