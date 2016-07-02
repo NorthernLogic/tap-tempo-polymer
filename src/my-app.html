@@ -1,11 +1,8 @@
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <link rel="import" href="bpm-display.html">
 <link rel="import" href="tapping-surface.html">
@@ -22,32 +19,25 @@
         --app-secondary-color: black;
       }
 
-      app-header {
-        background-color: var(--app-primary-color);
-        color: black;
+      .layout {
+        @apply(--layout-vertical);
+        @apply(--layout-fullbleed);
       }
 
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
+      .layout tapping-surface {
+        @apply(--layout-flex);
       }
 
     </style>
 
-    <app-header-layout fullbleed>
+    <div class="layout">
+      <paper-toolbar>
+        <div class="title">Tap Tempo</div>
+      </paper-toolbar>
 
-      <app-header condenses reveals effects="waterfall">
-        <app-toolbar>
-          <div title>Tap Tempo</div>
-        </app-toolbar>
-      </app-header>
-
-      <div>
-        <bpm-display bpm="[[bpm]]"></bpm-display>
-        <tapping-surface bpm="{{bpm}}"></tapping-surface>
-      </div>
-
-
-    </app-header-layout>
+      <bpm-display bpm="[[bpm]]"></bpm-display>
+      <tapping-surface bpm="{{bpm}}"></tapping-surface>
+    </div>
 
   </template>
 
