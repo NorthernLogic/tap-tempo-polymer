@@ -9,7 +9,6 @@ var Bpm = (function() {
 
     if (this.lastTap) {
       var thisDelta = now - this.lastTap;
-      this.lastTap = now;
 
       if (thisDelta > 3000) {
         this.reset();
@@ -28,12 +27,10 @@ var Bpm = (function() {
 
       this.deltaSums += thisDelta;
       this.deltaCount += 1;
-
-      return this.calculate();
     }
 
     this.lastTap = now;
-
+    return this.calculate();
   };
 
   Bpm.prototype.toMs = function(ms) {
@@ -41,6 +38,11 @@ var Bpm = (function() {
   };
 
   Bpm.prototype.calculate = function() {
+    // Avoid division by zero.
+    if (!this.deltaCount) {
+      return;
+    }
+
     return {
       avg: this.toMs(this.deltaSums / this.deltaCount),
       min: this.toMs(this.min),
