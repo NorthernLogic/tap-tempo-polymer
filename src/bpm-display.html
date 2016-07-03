@@ -1,0 +1,15 @@
+<html><head><meta charset="UTF-8"><link rel="import" href="my-app.html"></head><body><dom-module id="bpm-display">
+  <template>
+    <style>:host{display:block;}paper-toolbar{--paper-toolbar-background:white;--paper-toolbar-color:#646263;box-shadow:0 2px 5px rgba(0,0,0,0.26);}.flex{@apply (--layout-flex);}paper-toolbar div{text-align:center;}.bpm-value{font-size:2em;font-weight:bold;}.bpm-label{margin-left:.5em;font-weight:bold;text-transform:uppercase;}</style>
+
+    <paper-toolbar>
+      <div class="bpm-value">[[_bpmDisplay(bpm)]]</div>
+      <div class="bpm-label">[[_bpmLabel()]]</div>
+      <div class="flex"></div>
+      <div>[[_minMaxDisplay(bpm)]]</div>
+    </paper-toolbar>
+
+  </template>
+  <script>Polymer({is:"bpm-display",properties:{bpm:{type:Object}},_bpmLabel:function(){return"BPM"},_bpmDisplay:function(n){return n?Math.round(n.avg):"--"},_minMaxDisplay:function(n){if(n)return"Min "+Math.round(n.min)+" / Max "+Math.round(n.max)}});</script>
+</dom-module>
+</body></html>

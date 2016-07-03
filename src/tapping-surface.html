@@ -1,0 +1,22 @@
+<html><head><meta charset="UTF-8"><link rel="import" href="my-app.html"></head><body><dom-module id="tapping-surface">
+  <template>
+    <style>:host{display:block;background:white;}p.instruction{@apply (--layout-flex);margin:2.5em 56px;}.layout{@apply (--layout-vertical);height:100%;text-align:center;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.layout .brand{margin:1em 56px;}paper-ripple{color:var(--primary-color);}#autoripple{color:#534D0D;}</style>
+
+    <div class="layout">
+      <paper-ripple recenters=""></paper-ripple>
+      <paper-ripple id="autoripple" noink="" center=""></paper-ripple>
+      <p class="instruction">To determine the BPM, tap here to the rhythm of the music.</p>
+
+      <div class="brand">
+        <a href="http://wearenorthern.com" target="_blank">
+          <img src="/images/nl-mark.png" height="72" alt="Northern Logic logo">
+        </a>
+      </div>
+
+    </div>
+
+  </template>
+  <script charset="utf-8">var Bpm=function(){function t(){this.reset()}return t.prototype.tap=function(){var t=Date.now();if(this.lastTap){var i=t-this.lastTap;if(i>3e3)return void this.reset();("undefined"==typeof this.max||this.max>i)&&(this.max=i),("undefined"==typeof this.min||this.min<i)&&(this.min=i),this.deltaSums+=i,this.deltaCount+=1}return this.lastTap=t,this.calculate()},t.prototype.toMs=function(t){return 1e3/t*60},t.prototype.calculate=function(){if(this.deltaCount)return{avg:this.toMs(this.deltaSums/this.deltaCount),min:this.toMs(this.min),max:this.toMs(this.max)}},t.prototype.reset=function(){this.lastTap=void 0,this.deltaSums=0,this.deltaCount=0,this.min=void 0,this.max=void 0},t}();</script>
+  <script>Polymer({is:"tapping-surface",properties:{bpm:{type:Object,value:null,notify:!0,observer:"_bpmChanged"}},ready:function(){this._bpm=new Bpm,this.listen(this,"tap","_onTap")},_onTap:function(){var t=this._bpm.tap();t&&(this.bpm=t)},_bpmChanged:function(t){if(t){var n=t.avg,e=this.$.autoripple;this._pulseInt&&clearInterval(this._pulseInt),this._pulseInt=setInterval(function(){e.downAction(),e.upAction()},6e4/n)}}});</script>
+</dom-module>
+</body></html>

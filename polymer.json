@@ -1,0 +1,8 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/my-app.html",
+  "fragments": [
+    "src/bpm-display.html",
+    "src/tapping-surface.html"
+  ]
+}
