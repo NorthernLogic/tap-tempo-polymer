@@ -29,7 +29,7 @@
 
 
 /* eslint-disable quotes, comma-spacing */
-var PrecacheConfig = [["/index.html","dbab3fd7a83c1894f1423d5e71716888"],["/src/bpm-display.html","e60241c030c608e460e725d4e7ab6d51"],["/src/my-app.html","3244b8041d690d5b831e6894899a5291"],["/src/tapping-surface.html","b20e3a1382c93c015cba6a7a1611ab5b"]];
+var PrecacheConfig = [["/tap-tempo-polymer/index.html","dbab3fd7a83c1894f1423d5e71716888"],["/tap-tempo-polymer/src/bpm-display.html","e60241c030c608e460e725d4e7ab6d51"],["/tap-tempo-polymer/src/my-app.html","3f761a592f638c40fe2a0a901af96f34"],["/tap-tempo-polymer/src/tapping-surface.html","c35f7126c4f63a71650e1a38f5707d1a"]];
 /* eslint-enable quotes, comma-spacing */
 var CacheNamePrefix = 'sw-precache-v1--' + (self.registration ? self.registration.scope : '') + '-';
 
@@ -252,7 +252,3 @@ self.addEventListener('fetch', function(event) {
     }
   }
 });
-
-
-
-
