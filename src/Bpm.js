@@ -1,31 +1,39 @@
 var Bpm = (function() {
-  function Bpm(sampleSize) {
-    if (sampleSize === void 0) { sampleSize = 100; }
-    this.sampleSize = sampleSize;
-    this.taps = [];
-    this.deltas = [];
-    if (this.sampleSize < 2) {
-      throw new Error('sampleSize must be greater than 1');
-    }
+  function Bpm() {
+    this.reset();
   }
 
   Bpm.prototype.tap = function() {
 
     var now = Date.now();
 
-    if (this.lastTap && (now - this.lastTap) > 3000) {
-      this.reset();
-    }
+    if (this.lastTap) {
+      var thisDelta = now - this.lastTap;
+      this.lastTap = now;
 
-    this.taps.push(now);
+      if (thisDelta > 3000) {
+        this.reset();
+        return;
+      }
 
-    if (this.taps.length > this.sampleSize) {
-      this.taps.shift();
+      // This logic seems backwards as we are calculating BPM so the lower
+      // the delta the higher the BPM
+      if (typeof this.max === 'undefined' || this.max > thisDelta) {
+        this.max = thisDelta;
+      }
+
+      if (typeof this.min === 'undefined' || this.min < thisDelta) {
+        this.min = thisDelta;
+      }
+
+      this.deltaSums += thisDelta;
+      this.deltaCount += 1;
+
+      return this.calculate();
     }
 
     this.lastTap = now;
 
-    return this.calculate();
   };
 
   Bpm.prototype.toMs = function(ms) {
@@ -33,39 +41,17 @@ var Bpm = (function() {
   };
 
   Bpm.prototype.calculate = function() {
-    var lastTwo = this.taps.slice(-2, this.numTaps);
-
-    if (lastTwo.length != 2) {
-      return;
-    }
-
-    var difference = lastTwo[1] - lastTwo[0];
-
-    this.deltas.push(difference);
-    if (this.deltas.length > this.sampleSize) {
-      this.deltas.shift();
-    }
-
-    // This logic seems backwards as we are calculating BPM so the lower the difference
-    // the higher the BPM
-    if (typeof this.max === 'undefined' || this.max > difference) {
-      this.max = difference;
-    }
-
-    if (typeof this.min === 'undefined' || this.min < difference) {
-      this.min = difference;
-    }
-
     return {
-      avg: this.toMs(this.deltas.reduce(function(acc, num) { return acc + num; }, 0) / this.deltas.length),
+      avg: this.toMs(this.deltaSums / this.deltaCount),
       min: this.toMs(this.min),
       max: this.toMs(this.max),
     };
   };
 
   Bpm.prototype.reset = function() {
-    this.taps = [];
-    this.deltas = [];
+    this.lastTap = undefined;
+    this.deltaSums = 0;
+    this.deltaCount = 0;
     this.min = undefined;
     this.max = undefined;
   };
