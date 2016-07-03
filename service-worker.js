@@ -29,7 +29,7 @@
 
 
 /* eslint-disable quotes, comma-spacing */
-var PrecacheConfig = [["/bower_components/webcomponentsjs/webcomponents-lite.min.js","0fc977baabe843e858c7d6cde05986e7"],["/index.html","6362a3ed390808f2efafa4ee76d76d3a"],["/manifest.json","62895c4916c69e49f30a2d95d3fab776"],["/src/bpm-display.html","e60241c030c608e460e725d4e7ab6d51"],["/src/my-app.html","96a4ed33bacc9c541d6f194db12aa93c"],["/src/tapping-surface.html","e1783c5ac16322a14e361feb84ac011b"]];
+var PrecacheConfig = [["/index.html","dbab3fd7a83c1894f1423d5e71716888"],["/src/bpm-display.html","e60241c030c608e460e725d4e7ab6d51"],["/src/my-app.html","3244b8041d690d5b831e6894899a5291"],["/src/tapping-surface.html","b20e3a1382c93c015cba6a7a1611ab5b"]];
 /* eslint-enable quotes, comma-spacing */
 var CacheNamePrefix = 'sw-precache-v1--' + (self.registration ? self.registration.scope : '') + '-';
 
@@ -216,7 +216,7 @@ self.addEventListener('fetch', function(event) {
       cacheName = AbsoluteUrlToCacheName[urlWithoutIgnoredParameters];
     }
 
-    var navigateFallback = '/index.html';
+    var navigateFallback = '/tap-tempo-polymer/index.html';
     // Ideally, this would check for event.request.mode === 'navigate', but that is not widely
     // supported yet:
     // https://code.google.com/p/chromium/issues/detail?id=540967
