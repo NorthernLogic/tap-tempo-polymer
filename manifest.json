@@ -22,7 +22,7 @@
       "sizes": "384x384",
       "type": "image/svg"
     }],
-  "start_url": "/",
+  "start_url": "/tap-tempo-polymer/",
   "display": "standalone",
   "background_color": "#FFEC16",
   "theme_color": "#FFEC16"
